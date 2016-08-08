@@ -3,6 +3,9 @@ var ReactDOM = require('react-dom');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 
+var Main = require('Main');
+var VideoList = require('VideoList');
+
 //Load foundation
 $(document).foundation();
 
@@ -10,6 +13,11 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  <h1>Boilerplate 3 Project</h1>,
+  <Router history={hashHistory}>
+    <Route path="/" component={Main}>
+      <IndexRoute component={VideoList}/>
+    </Route>
+
+  </Router>,
   document.getElementById('app')
 );
