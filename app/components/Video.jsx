@@ -9,7 +9,7 @@ var Video = React.createClass({
   },
   render: function(){
     var {id, title, videoId, createdAt, showVideo, score} = this.props;
-    var videoClassName = score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' : 'video';
+    var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' : 
     var renderDate = () => {
       var message = 'Added on ';
       var timestamp = createdAt;
