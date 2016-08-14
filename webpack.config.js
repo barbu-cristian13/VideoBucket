@@ -25,6 +25,7 @@ module.exports = {
     alias:{
       Main: 'app/components/Main.jsx',
       VideoList: 'app/components/VideoList.jsx',
+      Video: 'app/components/Video.jsx',
       Nav: 'app/components/Nav.jsx',
       About: 'app/components/About.jsx',
       applicationStyles: 'app/styles/app.scss'
