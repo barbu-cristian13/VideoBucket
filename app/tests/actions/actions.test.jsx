@@ -19,9 +19,10 @@ describe('Actions', () => {
     it('should generate add video action', () => {
       var action = {
         type: 'ADD_VIDEO',
-        videoId: '12345'
+        youtubeId: '12345',
+        title: 'test1'
       }
-      var res = actions.addVideo(action.videoId);
+      var res = actions.addVideo(action.youtubeId, action.title);
 
       expect(res).toEqual(action);
     });
@@ -31,13 +32,14 @@ describe('Actions', () => {
         videoId: '12345',
         title: 'Test1',
         createdAt: 123544,
+        showVideo: false,
         score: 123
       }
       var action = {
         type: 'EDIT_VIDEO',
-        ...video
+        video
       }
-      var res = actions.editVideo({...video});
+      var res = actions.editVideo(action.video);
 
       expect(res).toEqual(action);
     });
@@ -81,9 +83,9 @@ describe('Actions', () => {
       }
       var action = {
         type: 'EDIT_VIDEO_LIST',
-        ...videoList
+        videoList
       }
-      var res = actions.editVideoList({...videoList});
+      var res = actions.editVideoList(action.videoList);
 
       expect(res).toEqual(action);
     });

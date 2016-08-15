@@ -9,19 +9,20 @@ export var setSearchText = (searchText) => {
 
 //Video
 //..................
-export var addVideo = (videoId) => {
+export var addVideo = (youtubeId, title) => {
   return {
     type: 'ADD_VIDEO',
-    videoId
+    youtubeId,
+    title
   };
 };
 
-export var editVideo = (video) => {
-  return {
-    type: 'EDIT_VIDEO',
-    ...video
-  };
-};
+// export var editVideo = (video) => {
+//   return {
+//     type: 'EDIT_VIDEO',
+//     video
+//   };
+// };
 
 export var deleteVideo = (videoId) => {
   return {
@@ -49,7 +50,7 @@ export var addVideoList = (videoListId) => {
 export var editVideoList = (videoList) => {
   return {
     type: 'EDIT_VIDEO_LIST',
-    ...videoList
+    videoList
   };
 };
 
