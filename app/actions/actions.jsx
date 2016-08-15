@@ -40,17 +40,20 @@ export var toggleVideo = (videoId) => {
 
 //Video List
 //..................
-export var addVideoList = (videoListId) => {
+export var addVideoList = (title, isPublic) => {
   return {
     type: 'ADD_VIDEO_LIST',
-    videoListId
+    title,
+    isPublic
   };
 };
 
-export var editVideoList = (videoList) => {
+export var editVideoList = (videoListId, title, isPublic) => {
   return {
     type: 'EDIT_VIDEO_LIST',
-    videoList
+    videoListId,
+    title,
+    isPublic
   };
 };
 

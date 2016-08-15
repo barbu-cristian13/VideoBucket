@@ -54,3 +54,33 @@ export var videosReducer = (state = [], action) => {
       return state;
   }
 };
+
+//Video
+//.............
+
+export var videosReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_VIDEO_LIST':
+      return [
+        ...state,
+        {
+          videoListId: uuid(),
+          title: action.title,
+          createdAt: moment().unix(),
+          isPublic: action.isPublic,
+          videoArray: null
+        }
+      ];
+    case 'DELETE_VIDEO_LIST':
+      return state.map((videoList) => {
+        if(video.videoListId === action.videoListId){
+          return {
+            ...videoList,
+            deletedAt: moment().unix()
+          };
+        }
+      });
+    default:
+      return state;
+  }
+};

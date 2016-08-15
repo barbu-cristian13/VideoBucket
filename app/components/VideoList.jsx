@@ -8,6 +8,7 @@ var VideoList = React.createClass({
     var videoList= {
       title: ' My custom video list',
       videoListId: '12345',
+      isPublic: true,
       videoArray: [
         {
           id: '1234',

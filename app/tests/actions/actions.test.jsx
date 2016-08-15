@@ -68,9 +68,10 @@ describe('Actions', () => {
     it('should generate add video list action', () => {
       var action = {
         type: 'ADD_VIDEO_LIST',
-        videoListId: '12345'
+        title: 'vid list 1',
+        isPublic: false
       }
-      var res = actions.addVideoList(action.videoListId);
+      var res = actions.addVideoList(action.title, action.isPublic);
 
       expect(res).toEqual(action);
     });
