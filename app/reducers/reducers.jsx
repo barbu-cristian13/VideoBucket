@@ -48,6 +48,7 @@ export var videosReducer = (state = [], action) => {
             ...video,
             showVideo: newShowVideo
           };
+          return video;
         }
       });
     default:
@@ -55,10 +56,10 @@ export var videosReducer = (state = [], action) => {
   }
 };
 
-//Video
+//Video List
 //.............
 
-export var videosReducer = (state = [], action) => {
+export var videoListsReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_VIDEO_LIST':
       return [
@@ -68,17 +69,48 @@ export var videosReducer = (state = [], action) => {
           title: action.title,
           createdAt: moment().unix(),
           isPublic: action.isPublic,
-          videoArray: null
+          videoArray: []
         }
       ];
     case 'DELETE_VIDEO_LIST':
       return state.map((videoList) => {
-        if(video.videoListId === action.videoListId){
+        if(videoList.videoListId === action.videoListId){
           return {
             ...videoList,
             deletedAt: moment().unix()
           };
         }
+        return videoList;
+      });
+    case 'ADD_VIDEO_TO_LIST':
+      return state.map((videoList) => {
+        if(videoList.videoListId === action.videoListId){
+          return {
+            ...videoList,
+            videoArray: [
+              ...videoList.videoArray,
+              {
+                videoId: uuid(),
+                youtubeId: action.youtubeId,
+                title: action.title,
+                createdAt: moment().unix(),
+                showVideo: false,
+                score: 0
+              }
+            ]
+          };
+        }
+        return videoList;
+      });
+    case 'DELETE_VIDEO_FROM_LIST':
+      return state.map((videoList) => {
+        if(videoList.videoListId === action.videoListId){
+          return {
+            ...videoList,
+            videoArray: videosReducer([...videoList.videoArray], {...action, type: 'DELETE_VIDEO'})
+          };
+        }
+        return videoList;
       });
     default:
       return state;

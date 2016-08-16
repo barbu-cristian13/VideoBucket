@@ -30,17 +30,6 @@ describe('Reducers', () => {
       expect(res[0].title).toEqual(action.title);
     });
 
-    // it('should set editVideo', () => {
-    //   var action = {
-    //     type: 'EDIT_VIDEO',
-    //     title: 'some title',
-    //     videoId: '1234'
-    //   };
-    //   var res = reducers.videosReducer(df({}), df(action));
-    //
-    //   expect(res).toEqual(action.video);
-    // });
-
     it('should set deleteVideo', () => {
       var videoArray = [{
           videoId: '12345',
@@ -78,6 +67,97 @@ describe('Reducers', () => {
       expect(res[0].videoId).toEqual(action.videoId);
       expect(res[0].showVideo).toEqual(! videoArray[0].showVideo);
 
+    });
+  });
+
+  describe('videoListsReducer', () => {
+    it('should set addVideoList', () => {
+      var action = {
+        type: 'ADD_VIDEO_LIST',
+        title: 'test1',
+        isPublic: false
+      }
+      var res = reducers.videoListsReducer(df([]), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0].title).toEqual(action.title);
+      expect(res[0].isPublic).toEqual(action.isPublic);
+      expect(res[0].videoArray.length).toEqual(0);
+    });
+    it('should set deleteVideoList', () => {
+      var videoLists = [
+        {
+            title: 'test',
+            videoListId: '1233455',
+            isPublic: false,
+            videoArray: [{
+              title: 'testvideo1',
+              youtubeId: 'zxcvsza',
+              videoId: '1234321',
+              createdAt: 1234563
+            },
+            {
+              title: 'testvideo2',
+              youtubeId: 'zxcvsz2',
+              videoId: '1234322',
+              createdAt: 1234543
+            }]
+        }
+      ];
+      var action = {
+        type: 'DELETE_VIDEO_LIST',
+        videoListId: '1233455'
+      }
+      var res = reducers.videoListsReducer(df(videoLists), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0].deletedAt).toExist();
+    });
+    it('should set addVideoToList', () => {
+      var videoLists = [{
+          title: 'test',
+          videoListId: '1233455',
+          isPublic: false,
+          videoArray: []
+      }];
+      var action = {
+        type: 'ADD_VIDEO_TO_LIST',
+        videoListId: '1233455',
+        youtubeId: 'zxcvcxz',
+        title: 'testvideo1'
+      }
+      var res = reducers.videoListsReducer(df(videoLists), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0].videoListId).toEqual(action.videoListId);
+      expect(res[0].videoArray.length).toEqual(1);
+      expect(res[0].videoArray[0].youtubeId).toEqual(action.youtubeId);
+      expect(res[0].videoArray[0].title).toEqual(action.title);
+    });
+    it('should set deleteVideoFromList', () => {
+      var videoLists = [{
+          title: 'test',
+          videoListId: '1233455',
+          isPublic: false,
+          videoArray: [{
+            title: 'testvideo1',
+            youtubeId: 'zxcvsza',
+            videoId: '12345',
+            createdAt: 1234563
+          }]
+      }];
+      var action = {
+        type: 'DELETE_VIDEO_FROM_LIST',
+        videoListId: '1233455',
+        videoId: '12345'
+      }
+      var res = reducers.videoListsReducer(df(videoLists), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0].videoListId).toEqual(action.videoListId);
+      expect(res[0].videoArray.length).toEqual(1);
+      expect(res[0].videoArray[0].videoId).toEqual(action.videoId);
+      expect(res[0].videoArray[0].deletedAt).toExist();
     });
   });
 });

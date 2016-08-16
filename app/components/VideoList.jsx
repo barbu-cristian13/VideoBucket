@@ -7,7 +7,7 @@ var VideoList = React.createClass({
     //var {videoList, searchText} = this.props;
     var videoList= {
       title: ' My custom video list',
-      videoListId: '12345',
+      videoListId: '123451',
       isPublic: true,
       videoArray: [
         {
@@ -31,7 +31,7 @@ var VideoList = React.createClass({
           title: 'Test3',
           videoId: 'X3ZqdrXgdFU',
           createdAt: 123864,
-          showVideo: true,
+          showVideo: false,
           score: 0
         },
         {
@@ -39,12 +39,28 @@ var VideoList = React.createClass({
           title: 'Test4',
           videoId: 'X3ZqdrXgdFU',
           createdAt: 125344,
-          showVideo: true,
+          showVideo: false,
           score: 6734
         },
         {
           id: '1238',
           title: 'Test5',
+          videoId: 'X3ZqdrXgdFU',
+          createdAt: 126432,
+          showVideo: true,
+          score: 15
+        },
+        {
+          id: '1239',
+          title: 'Test6',
+          videoId: 'X3ZqdrXgdFU',
+          createdAt: 125344,
+          showVideo: false,
+          score: 6734
+        },
+        {
+          id: '1242',
+          title: 'Test7',
           videoId: 'X3ZqdrXgdFU',
           createdAt: 126432,
           showVideo: true,
@@ -70,7 +86,7 @@ var VideoList = React.createClass({
       // }
     };
     return (
-      <div className="videoList">
+      <div key={videoList.videListId} className="videoList">
         <h2>{videoList.title}</h2>
         <div className="row">
           {renderVideos()}

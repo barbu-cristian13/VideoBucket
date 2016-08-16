@@ -17,13 +17,6 @@ export var addVideo = (youtubeId, title) => {
   };
 };
 
-// export var editVideo = (video) => {
-//   return {
-//     type: 'EDIT_VIDEO',
-//     video
-//   };
-// };
-
 export var deleteVideo = (videoId) => {
   return {
     type: 'DELETE_VIDEO',
@@ -40,7 +33,7 @@ export var toggleVideo = (videoId) => {
 
 //Video List
 //..................
-export var addVideoList = (title, isPublic) => {
+export var addVideoList = (title, isPublic=true) => {
   return {
     type: 'ADD_VIDEO_LIST',
     title,
@@ -61,5 +54,22 @@ export var deleteVideoList = (videoListId) => {
   return {
     type: 'DELETE_VIDEO_LIST',
     videoListId
+  };
+};
+
+export var addVideoToList = (videoListId, youtubeId, title) => {
+  return {
+    type: 'ADD_VIDEO_TO_LIST',
+    videoListId,
+    youtubeId,
+    title
+  };
+};
+
+export var deleteVideoFromList = (videoListId, videoId) => {
+  return {
+    type: 'DELETE_VIDEO_FROM_LIST',
+    videoListId,
+    videoId
   };
 };

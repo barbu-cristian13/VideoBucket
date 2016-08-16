@@ -27,22 +27,22 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
 
-    it('should generate edit video action', () => {
-      var video = {
-        videoId: '12345',
-        title: 'Test1',
-        createdAt: 123544,
-        showVideo: false,
-        score: 123
-      }
-      var action = {
-        type: 'EDIT_VIDEO',
-        video
-      }
-      var res = actions.editVideo(action.video);
-
-      expect(res).toEqual(action);
-    });
+    // it('should generate edit video action', () => {
+    //   var video = {
+    //     videoId: '12345',
+    //     title: 'Test1',
+    //     createdAt: 123544,
+    //     showVideo: false,
+    //     score: 123
+    //   }
+    //   var action = {
+    //     type: 'EDIT_VIDEO',
+    //     video
+    //   }
+    //   var res = actions.editVideo(action.video);
+    //
+    //   expect(res).toEqual(action);
+    // });
 
     it('should generate delete video action', () => {
       var action = {
@@ -64,6 +64,7 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
   });
+
   describe('Video List', () => {
     it('should generate add video list action', () => {
       var action = {
@@ -76,22 +77,22 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
 
-    it('should generate add video list action', () => {
-      var videoList = {
-        title: 'some title',
-        videoListId: '123345',
-        videoArray: []
-      }
-      var action = {
-        type: 'EDIT_VIDEO_LIST',
-        videoList
-      }
-      var res = actions.editVideoList(action.videoList);
+    // it('should generate add video list action', () => {
+    //   var videoList = {
+    //     title: 'some title',
+    //     videoListId: '123345',
+    //     videoArray: []
+    //   }
+    //   var action = {
+    //     type: 'EDIT_VIDEO_LIST',
+    //     videoList
+    //   }
+    //   var res = actions.editVideoList(action.videoList);
+    //
+    //   expect(res).toEqual(action);
+    // });
 
-      expect(res).toEqual(action);
-    });
-
-    it('should generate add video list action', () => {
+    it('should generate delete video list action', () => {
       var action = {
         type: 'DELETE_VIDEO_LIST',
         videoListId: '12345'

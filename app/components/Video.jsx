@@ -9,7 +9,7 @@ var Video = React.createClass({
   },
   render: function(){
     var {id, title, videoId, createdAt, showVideo, score} = this.props;
-    var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' : 
+    var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' :
     var renderDate = () => {
       var message = 'Added on ';
       var timestamp = createdAt;
@@ -20,12 +20,15 @@ var Video = React.createClass({
     return (
 
       <div className={videoClassName + ' align-center'}>
-          <div>
+          <div className="video__container">
             <h3>{title}</h3>
             <div className={playerClassName}>
               <YouTube videoId={videoId}  onReady={this.onReady} />
             </div>
             <p className="video__subtext">{renderDate()}</p>
+          </div>
+          <div className="video__controlls">
+            <button className="button">X</button>
           </div>
       </div>
 
