@@ -7,29 +7,27 @@ export var AddVideoList = React.createClass({
     e.preventDefault();
     var {dispatch} = this.props;
     var videoListTitle = this.refs.videoListTitle.value;
-    var isPrivate = this.refs.isPrivate.checked;
+    var isPublic = this.refs.isPublic.checked;
 
-    if(videoTitle.length > 0){
-      //dispatch(actions.startAddTodo(todoText));
-      if(youtubeId.length > 0){
-        this.refs.videoTitle.value = '';
-        this.refs.youtubeId.value = '';
-        dispatch(actions.addVideoToList(videoListId, youtubeId, videoTitle));
-      } else {
-        this.refs.youtubeId.focus();
-      }
+    if(videoListTitle.length > 0){
+      this.refs.videoListTitle.value = '';
+      this.refs.isPublic.checked = false;
+      dispatch(actions.addVideoList(videoListTitle, isPublic));
+
     } else {
-      this.refs.videoTitle.focus();
+      this.refs.videoListTitle.focus();
     }
   },
   render: function () {
     return (
-      <div className="addVideo">
+      <div className="addVideoList">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" ref="videoTitle" placeholder="Video Title" />
-          <input type="text" ref="youtubeId" placeholder="YouTube video Id" />
-          <button className="button expanded">Add New Video</button>
-          <span className="listName">Add to: {this.props.listName}</span>
+          <input type="text" ref="videoListTitle" placeholder="Name of the list" />
+          <label>
+            <input type="checkbox" ref="isPublic" />
+            Public list
+          </label>
+          <button className="button expanded">Add New Video List</button>
         </form>
       </div>
     );

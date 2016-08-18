@@ -1,7 +1,13 @@
 .videoList {
   align-items: flex-start;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $light-grey-background;
 }
 
 .videListItems {
   align-items: center;
+}
+
+.addVideoList {
+  margin: 1rem 0;
 }

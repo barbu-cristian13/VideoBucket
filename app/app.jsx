@@ -16,7 +16,7 @@ store.subscribe(() => {
   // console.log('video list 1 id: ', store.getState().videoLists[0].videoListId);
 });
 
-store.dispatch(actions.addVideoList('My Created list'));
+store.dispatch(actions.addVideoList('My Created list', false));
 var newId = store.getState().videoLists[0].videoListId;
 store.dispatch(actions.addVideoToList(newId, 'dQw4w9WgXcQ', 'Best video ever'));
 store.dispatch(actions.addVideoList('My Secret list'));

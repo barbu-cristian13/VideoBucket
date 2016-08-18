@@ -2,6 +2,7 @@ import React from 'react';
 var {connect} = require('react-redux');
 
 import VideoList from 'VideoList';
+import AddVideoList from 'AddVideoList';
 
 export var VideoBucket = React.createClass({
   render: function () {
@@ -18,6 +19,7 @@ export var VideoBucket = React.createClass({
     return(
       <div className="videoBucket">
         {renderVideoLists()}
+        <AddVideoList />
       </div>
     );
   }
