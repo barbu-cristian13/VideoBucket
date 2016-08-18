@@ -1,14 +1,17 @@
 var React = require('react');
+var {connect} = require('react-redux');
+var actions = require('actions');
 var moment = require('moment');
 import YouTube from 'react-youtube';
 import $ from 'jQuery';
+
 
 var Video = React.createClass({
   onReady(event) {
       console.log(`YouTube Player object for videoId: "${this.props.videoId}" has been saved to state.`); // eslint-disable-line
   },
   render: function(){
-    var {id, title, videoId, createdAt, showVideo, score} = this.props;
+    var {id, title, videoId, createdAt, showVideo, score, dispatch} = this.props;
     var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' :
     var renderDate = () => {
       var message = 'Added on ';
@@ -19,7 +22,9 @@ var Video = React.createClass({
     var playerClassName = showVideo ? 'flex-video video__player' : 'flex-video video__player__hidden';
     return (
 
-      <div className={videoClassName + ' align-center'}>
+      <div className={videoClassName + ' align-center'} onClick={() => {
+          dispatch(actions.toggleVideo(id));
+        }}>
           <div className="video__container">
             <h3>{title}</h3>
             <div className={playerClassName}>
@@ -40,4 +45,4 @@ var Video = React.createClass({
 // () =>{
 //   dispatch(actions.startToggleTodo(id, !completed));
 // }
-module.exports = Video;
+module.exports = connect()(Video);

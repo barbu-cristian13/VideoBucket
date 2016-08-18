@@ -25,7 +25,7 @@ export var videosReducer = (state = [], action) => {
           youtubeId: action.youtubeId,
           title: action.title,
           createdAt: moment().unix(),
-          showVideo: false,
+          showVideo: true,
           score: 0
         }
       ];
@@ -94,7 +94,7 @@ export var videoListsReducer = (state = [], action) => {
                 youtubeId: action.youtubeId,
                 title: action.title,
                 createdAt: moment().unix(),
-                showVideo: false,
+                showVideo: true,
                 score: 0
               }
             ]

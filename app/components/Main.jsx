@@ -1,4 +1,5 @@
 var React = require('react');
+var {connect} = require('react-redux');
 var Nav = require('Nav');
 
 var Main = (props) => {
