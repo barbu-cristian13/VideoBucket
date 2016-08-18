@@ -5,6 +5,7 @@ var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 var Main = require('Main');
 import VideoList from 'VideoList';
+import VideoBucket from 'VideoBucket';
 var About = require('About');
 
 import * as actions from 'actions';
@@ -18,7 +19,9 @@ store.subscribe(() => {
 store.dispatch(actions.addVideoList('My Created list'));
 var newId = store.getState().videoLists[0].videoListId;
 store.dispatch(actions.addVideoToList(newId, 'dQw4w9WgXcQ', 'Best video ever'));
-
+store.dispatch(actions.addVideoList('My Secret list'));
+var newId = store.getState().videoLists[1].videoListId;
+store.dispatch(actions.addVideoToList(newId, 'dQw4w9WgXcQ', 'Worst video ever'));
 
 //Load foundation
 $(document).foundation();
@@ -31,7 +34,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/" component={Main}>
         <Route path="/about" component={About}/>
-        <IndexRoute component={VideoList}/>
+        <IndexRoute component={VideoBucket}/>
       </Route>
     </Router>
   </Provider>,

@@ -7,23 +7,22 @@ import AddVideo from 'AddVideo';
 
 export var VideoList = React.createClass({
   render: function(){
-    var {videoLists} = this.props;
-    var videoList = videoLists[0];
+    var {videoArray, videoListId, createdAt, deletedAt, title} = this.props;
 
     var renderVideos = () => {
-        return videoList.videoArray.map((video) => {
+        return videoArray.map((video) => {
           return (
-              <Video key={video.videoId} videoListId={videoList.videoListId}  {...video}/>
+              <Video key={video.videoId} videoListId={videoListId}  {...video}/>
           );
         });
     };
     return (
       <div className="videoList">
-        <h2>{videoList.title}</h2>
+        <h2>{title}</h2>
         <div className="row">
           {renderVideos()}
           <div className="large-4 medium-6 small-6 columns">
-            <AddVideo listName={videoList.title} videoListId={videoList.videoListId}/>
+            <AddVideo listName={title} videoListId={videoListId}/>
           </div>
         </div>
       </div>
@@ -31,11 +30,7 @@ export var VideoList = React.createClass({
   }
 });
 
-export default connect((state) => {
-  return {
-    videoLists: state.videoLists
-  };
-})(VideoList);
+export default connect()(VideoList);
 
 // var videoList= {
 //   title: 'My custom video list',
