@@ -17,7 +17,7 @@ store.subscribe(() => {
 
 store.dispatch(actions.addVideoList('My Created list'));
 var newId = store.getState().videoLists[0].videoListId;
-store.dispatch(actions.addVideoToList(newId, 'zxcvasd', 'test video 1'));
+store.dispatch(actions.addVideoToList(newId, 'dQw4w9WgXcQ', 'Best video ever'));
 
 
 //Load foundation

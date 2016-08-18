@@ -107,8 +107,16 @@ export var videoListsReducer = (state = [], action) => {
         if(videoList.videoListId === action.videoListId){
           return {
             ...videoList,
-            videoArray: videosReducer([...videoList.videoArray], {...action, type: 'DELETE_VIDEO'})
-          };
+            videoArray: videoList.videoArray.map((video) => {
+                if (video.videoId === action.videoId){
+                  return {
+                    ...video,
+                    deletedAt: moment().unix()
+                  };
+                }
+                return video;
+              })
+          }
         }
         return videoList;
       });
