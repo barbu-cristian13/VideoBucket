@@ -1,14 +1,13 @@
 var React = require('react');
 var {connect} = require('react-redux');
-var actions = require('actions');
+import * as actions from 'actions';
 
-var AddVideo = React.createClass({
+export var AddVideo = React.createClass({
   handleSubmit: function(e){
     e.preventDefault();
-    var {dispatch} = this.props;
+    var {dispatch, videoListId} = this.props;
     var videoTitle = this.refs.videoTitle.value;
     var youtubeId = this.refs.youtubeId.value;
-    var videoListId = this.props.videoListId;
 
     if(videoTitle.length > 0){
       //dispatch(actions.startAddTodo(todoText));
@@ -37,4 +36,4 @@ var AddVideo = React.createClass({
   }
 });
 
-module.exports = connect()(AddVideo);
+export default connect()(AddVideo);

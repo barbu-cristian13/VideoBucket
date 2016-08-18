@@ -1,39 +1,24 @@
 var React = require('react');
 var {connect} = require('react-redux');
 
-var Video = require('Video');
-var AddVideo = require('AddVideo');
+import * as actions from 'actions';
+import Video from 'Video';
+import AddVideo from 'AddVideo';
 
-var VideoList = React.createClass({
+export var VideoList = React.createClass({
   render: function(){
     var {videoLists} = this.props;
     var videoList = videoLists[0];
-    // var videoList= {
-    //   title: 'My custom video list',
-    //   videoListId: '123451',
-    //   isPublic: true,
-    //   videoArray: [
-    //     {
-    //       id: '1234',
-    //       title: 'Test1',
-    //       videoId: 'X3ZqdrXgdFU',
-    //       createdAt: 123543,
-    //       showVideo: true,
-    //       score: 123
-    //     }
-    //   ]
-    // }
+
     var renderVideos = () => {
         return videoList.videoArray.map((video) => {
           return (
-            <div className="large-4 medium-6 small-6 columns">
-              <Video key={video.id} {...video}/>
-            </div>
+              <Video key={video.videoId} videoListId={videoList.videoListId}  {...video}/>
           );
         });
     };
     return (
-      <div key={videoList.videoListId} className="videoList">
+      <div className="videoList">
         <h2>{videoList.title}</h2>
         <div className="row">
           {renderVideos()}
@@ -46,7 +31,7 @@ var VideoList = React.createClass({
   }
 });
 
-module.exports = connect((state) => {
+export default connect((state) => {
   return {
     videoLists: state.videoLists
   };

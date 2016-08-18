@@ -4,10 +4,10 @@ var {Provider} = require('react-redux');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 var Main = require('Main');
-var VideoList = require('VideoList');
+import VideoList from 'VideoList';
 var About = require('About');
 
-var actions = require('actions');
+import * as actions from 'actions';
 var store = require('configureStore').configure();
 
 store.subscribe(() => {
