@@ -72,6 +72,11 @@ export var videoListsReducer = (state = [], action) => {
           videoArray: []
         }
       ];
+    case 'ADD_VIDEO_LISTS':
+      return [
+        ...state,
+        ...action.videoLists
+      ];
     case 'DELETE_VIDEO_LIST':
       return state.map((videoList) => {
         if(videoList.videoListId === action.videoListId){

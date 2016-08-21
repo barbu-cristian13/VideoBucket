@@ -84,6 +84,23 @@ describe('Reducers', () => {
       expect(res[0].isPublic).toEqual(action.isPublic);
       expect(res[0].videoArray.length).toEqual(0);
     });
+
+    it('should add existing videos', () => {
+      var videoLists = [{
+        videoListId: '12345',
+        createdAt: 123,
+        isPublic: true,
+        videoArray: []
+      }];
+      var action = {
+        type: 'ADD_VIDEO_LISTS',
+        videoLists
+      };
+      var res = reducers.videoListsReducer(df([]), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0]).toEqual(videoLists[0]);
+    });
     it('should set deleteVideoList', () => {
       var videoLists = [
         {

@@ -27,9 +27,9 @@ export var Video = React.createClass({
     var playerClassName = showVideo ? 'flex-video video__player' : 'flex-video video__player__hidden';
     return (
       <div className="large-4 medium-6 small-6 columns">
-      <div className={videoClassName + ''} onClick={() => {
-          //dispatch(actions.toggleVideoFromList(videoId));
-        }}>
+        <div className={videoClassName + ''} onClick={() => {
+            //dispatch(actions.toggleVideoFromList(videoId));
+          }}>
           <div className="video__container">
             <h3>{title}</h3>
             <div className={playerClassName}>
@@ -38,7 +38,7 @@ export var Video = React.createClass({
             <p className="video__subtext">{renderDate()}</p>
           </div>
           <div className="video__controlls">
-            <button className="button" ref="deleteVideo" onClick={this.handleDelete}>X</button>
+            <button className="alert button" ref="deleteVideo" onClick={this.handleDelete}>X</button>
           </div>
       </div>
     </div>

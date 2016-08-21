@@ -40,6 +40,12 @@ export var addVideoList = (title, isPublic=true) => {
     isPublic
   };
 };
+export var addVideoLists = (videoLists) => {
+  return {
+    type: 'ADD_VIDEO_LISTS',
+    videoLists
+  }
+}
 
 export var editVideoList = (videoListId, title, isPublic) => {
   return {

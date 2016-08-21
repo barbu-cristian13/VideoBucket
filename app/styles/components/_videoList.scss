@@ -11,3 +11,11 @@
 .addVideoList {
   margin: 1rem 0;
 }
+
+.videoList__delete{
+  padding: 1rem;
+
+  .deleteListButton{
+    border-radius: 10px;
+  }
+}

@@ -4,28 +4,40 @@ var {connect} = require('react-redux');
 import * as actions from 'actions';
 import Video from 'Video';
 import AddVideo from 'AddVideo';
+var VideoAPI = require('VideoAPI');
 
 export var VideoList = React.createClass({
+  handleDelete: function(){
+    var {dispatch, videoListId} = this.props;
+
+    dispatch(actions.deleteVideoList(videoListId));
+  },
   render: function(){
     var {videoArray, videoListId, createdAt, deletedAt, title} = this.props;
 
     var renderVideos = () => {
-        return videoArray.map((video) => {
+        return VideoAPI.filterVideos(videoArray).map((video) => {
           return (
               <Video key={video.videoId} videoListId={videoListId}  {...video}/>
           );
         });
     };
     return (
-      <div className="videoList">
-        <h2>{title}</h2>
-        <div className="row">
-          {renderVideos()}
-          <div className="large-4 medium-6 small-6 columns">
-            <AddVideo listName={title} videoListId={videoListId}/>
+        <div className="videoList">
+          <div className="row">
+            <h2 className="small-10 columns">{title}</h2>
+            <div className="small-2 columns videoList__delete">
+              <button className="alert button deleteListButton" ref="deleteVideo" onClick={this.handleDelete}>X</button>
+            </div>
+          </div>
+          <div className="row">
+            {renderVideos()}
+            <div className="large-4 medium-6 small-6 columns">
+              <AddVideo listName={title} videoListId={videoListId}/>
+            </div>
           </div>
         </div>
-      </div>
+
     );
   }
 });

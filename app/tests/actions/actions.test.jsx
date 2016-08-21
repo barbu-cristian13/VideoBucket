@@ -77,6 +77,22 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
 
+    it('should generate add video lists action', () => {
+      var videoLists = [{
+        videoListId: '12345',
+        createdAt: 123,
+        isPublic: true,
+        videoArray: []
+      }];
+      var action = {
+        type: 'ADD_VIDEO_LISTS',
+        videoLists
+      };
+      var res = actions.addVideoLists(action.videoLists);
+
+      expect(res).toEqual(action);
+    });
+
     // it('should generate add video list action', () => {
     //   var videoList = {
     //     title: 'some title',
