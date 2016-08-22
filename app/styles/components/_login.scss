@@ -1,0 +1,16 @@
+.page-title {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.callout-auth{
+  background-color: $light-grey-background;
+  border: 1px solid $grey;
+  padding: 2rem;
+  text-align: center;
+
+  h3, p {
+    margin-bottom: 2rem;
+  }
+}

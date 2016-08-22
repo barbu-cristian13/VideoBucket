@@ -1,5 +1,5 @@
 var React = require('react');
-var {connect} = require('react-redux');
+import * as Redux from 'react-redux';
 
 import * as actions from 'actions';
 import Video from 'Video';
@@ -13,7 +13,7 @@ export var VideoList = React.createClass({
     dispatch(actions.startDeleteVideoList(videoListId));
   },
   render: function(){
-    var {videoArray, videoListId, createdAt, deletedAt, title} = this.props;
+    var {videoArray, videoListId,isPublic, createdAt,deletedAt, title, dispatch} = this.props;
 
     var renderVideos = () => {
         return VideoAPI.filterVideos(videoArray).map((video) => {
@@ -25,7 +25,15 @@ export var VideoList = React.createClass({
     return (
         <div className="videoList">
           <div className="row">
-            <h2 className="small-10 columns">{title}</h2>
+            <div className="small-10 columns">
+              <h2 >{title}</h2>
+              <label>
+                <input type="checkbox" checked={isPublic} ref="isPublicList" onChange={() => {
+                    dispatch(actions.startToggleVideoList(videoListId, !isPublic));
+                }}/>
+                Public List
+              </label>
+            </div>
             <div className="small-2 columns videoList__delete">
               <button className="alert button deleteListButton" ref="deleteVideo" onClick={this.handleDelete}>X</button>
             </div>
@@ -42,67 +50,4 @@ export var VideoList = React.createClass({
   }
 });
 
-export default connect()(VideoList);
-
-// var videoList= {
-//   title: 'My custom video list',
-//   videoListId: '123451',
-//   isPublic: true,
-//   videoArray: [
-//     {
-//       id: '1234',
-//       title: 'Test1',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 123543,
-//       showVideo: true,
-//       score: 123
-//     },
-//     {
-//       id: '1235',
-//       title: 'Test2',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 123745,
-//       showVideo: true,
-//       score: -21
-//     },
-//     {
-//       id: '1236',
-//       title: 'Test3',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 123864,
-//       showVideo: true,
-//       score: 0
-//     },
-//     {
-//       id: '1237',
-//       title: 'Test4',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 125344,
-//       showVideo: true,
-//       score: 6734
-//     },
-//     {
-//       id: '1238',
-//       title: 'Test5',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 126432,
-//       showVideo: true,
-//       score: 15
-//     },
-//     {
-//       id: '1239',
-//       title: 'Test6',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 125344,
-//       showVideo: true,
-//       score: 6734
-//     },
-//     {
-//       id: '1242',
-//       title: 'Test7',
-//       videoId: 'X3ZqdrXgdFU',
-//       createdAt: 126432,
-//       showVideo: true,
-//       score: 15
-//     }
-//   ]
+export default Redux.connect()(VideoList);

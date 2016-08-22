@@ -7,7 +7,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 try{
   envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
 } catch(e) {
-  
+
 }
 
 module.exports = {
@@ -51,6 +51,7 @@ module.exports = {
       './app/api'
     ],
     alias:{
+      localRouter: 'app/router/index.jsx',
       firebaseConfig: 'app/firebase/index.js',
       actions: 'app/actions/actions.jsx',
       reducers: 'app/reducers/reducers.jsx',

@@ -1,7 +1,7 @@
-var React = require('react');
-var {connect} = require('react-redux');
+import React from 'react';
+import * as Redux from 'react-redux';
 
-var Nav = require('Nav');
+import Nav from 'Nav';
 
 export var Main = (props) => {
   return (
@@ -16,4 +16,4 @@ export var Main = (props) => {
   );
 }
 
-export default connect()(Main);
+export default Redux.connect()(Main);

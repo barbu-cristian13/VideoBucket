@@ -1,4 +1,4 @@
-import firebase, {firebaseRef} from 'firebaseConfig';
+import firebase, {firebaseRef, githubProvider} from 'firebaseConfig';
 import moment from 'moment';
 //Search
 //..................
@@ -17,6 +17,7 @@ export var addVideoList = (videoList) => {
     videoList
   };
 };
+
 export var startAddVideoList = (title, isPublic=true) => {
   return (dispatch, getState) => {
     var videoList = {
@@ -46,23 +47,25 @@ export var addVideoLists = (videoLists) => {
   }
 };
 
-export var startAddTodos = () => {
+export var startAddVideoLists = () => {
   return (dispatch, getState) => {
     var videoListsRef = firebaseRef.child('videoLists');
 
     return videoListsRef.once('value').then((snapshot) => {
       var videoLists = snapshot.val() || {};
       var parseVideoLists = [];
-
+      console.log('i iz trying');
       Object.keys(videoLists).forEach((videoListId) => {
         var parseVideoArray = [];
-
-        Object.keys(videoLists[videoListId].videoArray).forEach((videoId) => {
-          parseVideoArray.push({
-            videoId,
-            ...videoLists[videoListId].videoArray[videoId]
+        console.log('I am here');
+        if('videoArray' in videoLists[videoListId]){
+          Object.keys(videoLists[videoListId].videoArray).forEach((videoId) => {
+            parseVideoArray.push({
+              videoId,
+              ...videoLists[videoListId].videoArray[videoId]
+            });
           });
-        });
+        }
         parseVideoLists.push({
           videoListId,
           ...videoLists[videoListId],
@@ -103,7 +106,21 @@ export var startDeleteVideoList = (videoListId) => {
       dispatch(updateVideoList(videoListId, updates));
     });
   };
-}
+};
+
+export var startToggleVideoList = (videoListId, isPublic) => {
+  return (dispatch, getState) => {
+    var videoListRef = firebaseRef.child(`videoLists/${videoListId}`);
+
+    var updates = {
+        isPublic
+    }
+    return videoListRef.update(updates).then(() => {
+      dispatch(updateVideoList(videoListId, updates));
+    });
+  };
+};
+
 
 export var addVideoToList = (videoListId, video) => {
   return {
@@ -153,4 +170,26 @@ export var startDeleteVideoFromList = (videoListId, videoId) => {
       dispatch(updateVideoFromList(videoListId, videoId, updates));
     });
   };
-}
+};
+
+
+//Auth
+//.........................
+
+export var startLogin = () => {
+  return (dispatch, getState) => {
+    firebase.auth().signInWithPopup(githubProvider).then((result) => {
+      console.log('Auth worked!');
+    }, (error) => {
+      console.log('Unable to auth', error);
+    });
+  };
+};
+
+export var startLogout = () => {
+  return (dispatch, getState) => {
+    firebase.auth().signOut().then(() => {
+      console.log('Logged out!');
+    });
+  };
+};
