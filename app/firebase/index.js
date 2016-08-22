@@ -2,12 +2,12 @@ import firebase from 'firebase';
 
 try{
   var config = {
-      apiKey: "AIzaSyBEEt1djHPOVLNy0cEu9UcFRkDTwZCjolc",
-      authDomain: "videobucket-77b9b.firebaseapp.com",
-      databaseURL: "https://videobucket-77b9b.firebaseio.com",
-      storageBucket: "videobucket-77b9b.appspot.com",
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      databaseURL: process.env.DATABASE_URL,
+      storageBucket: process.env.STORAGE_BUCKET
     };
-
+  console.log('Testing things out', config);
   firebase.initializeApp(config);
 } catch (e) {
 
