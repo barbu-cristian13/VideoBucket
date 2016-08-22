@@ -1,4 +1,4 @@
-import firebase, {firebaseRef, githubProvider} from 'firebaseConfig';
+import firebase, {firebaseRef, githubProvider, googleProvider} from 'firebaseConfig';
 import moment from 'moment';
 //Search
 //..................
@@ -27,7 +27,8 @@ export var startAddVideoList = (title, isPublic=true) => {
       deletedAt: null,
       videoArray: []
     }
-    var videoListRef = firebaseRef.child('videoLists').push(videoList);
+    var uid = getState().auth.uid;
+    var videoListRef = firebaseRef.child(`users/${uid}/videoLists`).push(videoList);
 
     return videoListRef.then(() => {
       dispatch(addVideoList({
@@ -49,7 +50,8 @@ export var addVideoLists = (videoLists) => {
 
 export var startAddVideoLists = () => {
   return (dispatch, getState) => {
-    var videoListsRef = firebaseRef.child('videoLists');
+    var uid = getState().auth.uid;
+    var videoListsRef = firebaseRef.child(`users/${uid}/videoLists`);
 
     return videoListsRef.once('value').then((snapshot) => {
       var videoLists = snapshot.val() || {};
@@ -88,7 +90,8 @@ export var updateVideoList = (videoListId, updates) => {
 
 export var startDeleteVideoList = (videoListId) => {
   return (dispatch, getState) => {
-    var videoListRef = firebaseRef.child(`videoLists/${videoListId}`);
+    var uid = getState().auth.uid;
+    var videoListRef = firebaseRef.child(`users/${uid}/videoLists/${videoListId}`);
 
     var updates = {
         deletedAt: moment().unix()
@@ -101,7 +104,8 @@ export var startDeleteVideoList = (videoListId) => {
 
 export var startToggleVideoList = (videoListId, isPublic) => {
   return (dispatch, getState) => {
-    var videoListRef = firebaseRef.child(`videoLists/${videoListId}`);
+    var uid = getState().auth.uid;
+    var videoListRef = firebaseRef.child(`users/${uid}/videoLists/${videoListId}`);
 
     var updates = {
         isPublic
@@ -131,7 +135,8 @@ export var startAddVideoToList = (videoListId, youtubeId, title) => {
       deletedAt: null,
       score: 0
     }
-    var videoRef = firebaseRef.child('videoLists').child(videoListId).child('videoArray').push(video);
+    var uid = getState().auth.uid;
+    var videoRef = firebaseRef.child(`users/${uid}/videoLists`).child(videoListId).child('videoArray').push(video);
 
     return videoRef.then(() => {
       dispatch(addVideoToList(videoListId, {
@@ -153,7 +158,8 @@ export var updateVideoFromList = (videoListId, videoId, updates) => {
 
 export var startDeleteVideoFromList = (videoListId, videoId) => {
   return (dispatch, getState) => {
-    var videoRef = firebaseRef.child(`videoLists/${videoListId}`).child(`videoArray/${videoId}`);
+    var uid = getState().auth.uid;
+    var videoRef = firebaseRef.child(`users/${uid}/videoLists/${videoListId}`).child(`videoArray/${videoId}`);
     var updates = {
         deletedAt: moment().unix()
     }
@@ -173,9 +179,19 @@ export var login = (uid) => {
   }
 };
 
-export var startLogin = () => {
+export var startLogin = (provider) => {
   return (dispatch, getState) => {
-    firebase.auth().signInWithPopup(githubProvider).then((result) => {
+    var myProvider = googleProvider;
+    switch(provider){
+      case 'google':
+        myProvider = googleProvider;
+        break;
+      case 'github':
+        myProvider = githubProvider;
+        break;
+    }
+
+    firebase.auth().signInWithPopup(myProvider).then((result) => {
       console.log('Auth worked!');
     }, (error) => {
       console.log('Unable to auth', error);

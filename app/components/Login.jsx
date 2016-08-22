@@ -4,10 +4,15 @@ import * as Redux from 'react-redux';
 import * as actions from 'actions';
 
 export var Login = React.createClass({
-  onLogin: function () {
+  onGitHubLogin: function () {
     var {dispatch} = this.props;
 
-    dispatch(actions.startLogin());
+    dispatch(actions.startLogin('github'));
+  },
+  onGoogleLogin: function () {
+    var {dispatch} = this.props;
+
+    dispatch(actions.startLogin('google'));
   },
   render: function () {
     return (
@@ -20,7 +25,8 @@ export var Login = React.createClass({
               <p>
                 Login with existing account below.
               </p>
-              <button className="button" onClick={this.onLogin}>Login with GitHub</button>
+              <button className="button" onClick={this.onGitHubLogin}>Login with GitHub</button>
+              <button className="button" onClick={this.onGoogleLogin}>Login with Google</button>
             </div>
           </div>
         </div>

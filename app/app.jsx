@@ -11,6 +11,7 @@ import router from 'localRouter';
 firebase.auth().onAuthStateChanged((user) => {
     if(user) {
       store.dispatch(actions.login(user.uid));
+      store.dispatch(actions.startAddVideoLists());
       hashHistory.push('/site');
     }else {
       store.dispatch(actions.logout());
@@ -20,12 +21,8 @@ firebase.auth().onAuthStateChanged((user) => {
 
 store.subscribe(() => {
   var state = store.getState();
-  console.log('New state', state);
-  // console.log('video list 1 id: ', store.getState().videoLists[0].videoListId);
-  //VideoAPI.setVideoLists(state.videoLists);
+  //console.log('New state', state);
 });
-
-store.dispatch(actions.startAddVideoLists());
 
 //Load foundation
 $(document).foundation();
