@@ -8,18 +8,22 @@ import VideoList from 'VideoList';
 import VideoBucket from 'VideoBucket';
 var About = require('About');
 
+import firebase, {firebaseRef} from 'firebaseConfig';
 import * as actions from 'actions';
 var store = require('configureStore').configure();
 var VideoAPI = require('VideoAPI');
+
 store.subscribe(() => {
   var state = store.getState();
   console.log('New state', state);
   // console.log('video list 1 id: ', store.getState().videoLists[0].videoListId);
-  VideoAPI.setVideoLists(state.videoLists);
+  //VideoAPI.setVideoLists(state.videoLists);
 });
 
-var initialVideos = VideoAPI.getVideoLists();
-store.dispatch(actions.addVideoLists(initialVideos));
+store.dispatch(actions.startAddTodos());
+
+//var initialVideos = VideoAPI.getVideoLists();
+//store.dispatch(actions.addVideoLists(initialVideos));
 
 // store.dispatch(actions.addVideoList('My Created list', false));
 // var newId = store.getState().videoLists[0].videoListId;

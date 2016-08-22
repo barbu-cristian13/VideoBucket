@@ -1,30 +1,14 @@
 var $ = require('jQuery');
 
 module.exports = {
-  setVideoLists: function(videoLists) {
-    if($.isArray(videoLists)){
-      localStorage.setItem('videoLists', JSON.stringify(videoLists));
-      return videoLists;
-    }
-  },
-  getVideoLists: function(){
-    var stringVideoLists = localStorage.getItem('videoLists');
-    var videoLists = [];
-
-    try{
-      videoLists = JSON.parse(stringVideoLists);
-    } catch(e) {
-
-    }
-
-    return $.isArray(videoLists) ? videoLists : [];
-  },
   filterVideoLists: function (videoLists){
     var filteredVideoLists = videoLists;
-
+    if(filteredVideoLists === null){
+      return [];
+    }
     //filter by deletedAt
     filteredVideoLists = filteredVideoLists.filter((videoList)=>{
-      return !('deletedAt' in videoList);
+      return (!('deletedAt' in videoList) || videoList.deletedAt === null);
     });
     // //filter by searchText
     // filteredVideoLists = filteredVideoLists.filter((video) => {
@@ -46,10 +30,12 @@ module.exports = {
   },
   filterVideos: function (videoArray){
     var filteredVideos = videoArray;
-
+    if(filteredVideos === null){
+      return [];
+    }
     //filter by deletedAt
     filteredVideos = filteredVideos.filter((video)=>{
-      return !('deletedAt' in video);
+      return (!('deletedAt' in video) || video.deletedAt === null);
     });
 
     return filteredVideos;

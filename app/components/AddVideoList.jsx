@@ -12,7 +12,7 @@ export var AddVideoList = React.createClass({
     if(videoListTitle.length > 0){
       this.refs.videoListTitle.value = '';
       this.refs.isPublic.checked = false;
-      dispatch(actions.addVideoList(videoListTitle, isPublic));
+      dispatch(actions.startAddVideoList(videoListTitle, isPublic));
 
     } else {
       this.refs.videoListTitle.focus();

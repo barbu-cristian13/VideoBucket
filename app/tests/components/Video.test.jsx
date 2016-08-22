@@ -29,24 +29,24 @@ describe('Video', () => {
   //
   //   expect(spy).toHaveBeenCalledWith(action);
   // });
-  it('should dispatch DELETE_VIDEO_FROM_LIST action on delete button clikc', () => {
-    var videoListId = '123455';
-    var videoData = {
-      videoId: '1234',
-      title: 'Test1',
-      youtubeId: 'X3ZqdrXgdFU',
-      createdAt: 123543,
-      showVideo: true,
-      score: 123
-    }
-    var action = actions.deleteVideoFromList(videoListId, videoData.videoId);
-
-    var spy = expect.createSpy();
-    var video = TestUtils.renderIntoDocument(<Video videoListId={videoListId} {...videoData} dispatch={spy}/>)
-    var $el = $(ReactDOM.findDOMNode(video));
-
-    TestUtils.Simulate.click($el.find('button')[0]);
-
-    expect(spy).toHaveBeenCalledWith(action);
-  });
+  // it('should dispatch DELETE_VIDEO_FROM_LIST action on delete button clikc', () => {
+  //   var videoListId = '123455';
+  //   var videoData = {
+  //     videoId: '1234',
+  //     title: 'Test1',
+  //     youtubeId: 'X3ZqdrXgdFU',
+  //     createdAt: 123543,
+  //     showVideo: true,
+  //     score: 123
+  //   }
+  //   var action = actions.deleteVideoFromList(videoListId, videoData.videoId);
+  //
+  //   var spy = expect.createSpy();
+  //   var video = TestUtils.renderIntoDocument(<Video videoListId={videoListId} {...videoData} dispatch={spy}/>)
+  //   var $el = $(ReactDOM.findDOMNode(video));
+  //
+  //   TestUtils.Simulate.click($el.find('button')[0]);
+  //
+  //   expect(spy).toHaveBeenCalledWith(action);
+  // });
 });

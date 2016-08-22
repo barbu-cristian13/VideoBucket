@@ -14,7 +14,7 @@ export var AddVideo = React.createClass({
       if(youtubeId.length > 0){
         this.refs.videoTitle.value = '';
         this.refs.youtubeId.value = '';
-        dispatch(actions.addVideoToList(videoListId, youtubeId, videoTitle));
+        dispatch(actions.startAddVideoToList(videoListId, youtubeId, videoTitle));
       } else {
         this.refs.youtubeId.focus();
       }

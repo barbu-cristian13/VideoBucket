@@ -13,10 +13,10 @@ export var Video = React.createClass({
   handleDelete: function(){
     var {dispatch, videoListId, videoId} = this.props;
 
-    dispatch(actions.deleteVideoFromList(videoListId, videoId));
+    dispatch(actions.startDeleteVideoFromList(videoListId, videoId));
   },
   render: function(){
-    var {title, videoId, youtubeId, createdAt, showVideo, score, dispatch} = this.props;
+    var {title, videoId, youtubeId, createdAt, score, dispatch} = this.props;
     var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' :
     var renderDate = () => {
       var message = 'Added on ';
@@ -24,7 +24,7 @@ export var Video = React.createClass({
 
       return message + moment.unix(timestamp).format('MMM Do YYYY');
     };
-    var playerClassName = showVideo ? 'flex-video video__player' : 'flex-video video__player__hidden';
+    var playerClassName = 'flex-video video__player';
     return (
       <div className="large-4 medium-6 small-6 columns">
         <div className={videoClassName + ''} onClick={() => {

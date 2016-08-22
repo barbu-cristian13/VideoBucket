@@ -1,4 +1,5 @@
-var redux = require('redux');
+import * as redux from 'redux';
+import thunk from 'redux-thunk';
 
 var {searchTextReducer, videoListsReducer} = require('reducers');
 
@@ -9,6 +10,7 @@ export var configure = () => {
   });
 
   var store = redux.createStore(reducer, redux.compose(
+    redux.applyMiddleware(thunk),
     window.devToolsExtensions ? window.devToolsExtensions() : f => f
   ));
 

@@ -12,50 +12,6 @@ export var searchTextReducer = (state = '', action) => {
   };
 };
 
-//Video
-//.............
-
-export var videosReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_VIDEO':
-      return [
-        ...state,
-        {
-          videoId: uuid(),
-          youtubeId: action.youtubeId,
-          title: action.title,
-          createdAt: moment().unix(),
-          showVideo: true,
-          score: 0
-        }
-      ];
-    // case 'EDIT_VIDEO':
-    //   return action.video;
-    case 'DELETE_VIDEO':
-    return state.map((video) => {
-      if(video.videoId === action.videoId){
-        return {
-          ...video,
-          deletedAt: moment().unix()
-        };
-      }
-    });
-    case 'TOGGLE_VIDEO':
-      return state.map((video) => {
-        if(video.videoId === action.videoId){
-          var newShowVideo = !video.showVideo;
-          return {
-            ...video,
-            showVideo: newShowVideo
-          };
-          return video;
-        }
-      });
-    default:
-      return state;
-  }
-};
-
 //Video List
 //.............
 
@@ -64,25 +20,19 @@ export var videoListsReducer = (state = [], action) => {
     case 'ADD_VIDEO_LIST':
       return [
         ...state,
-        {
-          videoListId: uuid(),
-          title: action.title,
-          createdAt: moment().unix(),
-          isPublic: action.isPublic,
-          videoArray: []
-        }
+        action.videoList
       ];
     case 'ADD_VIDEO_LISTS':
       return [
         ...state,
         ...action.videoLists
       ];
-    case 'DELETE_VIDEO_LIST':
+    case 'UPDATE_VIDEO_LIST':
       return state.map((videoList) => {
         if(videoList.videoListId === action.videoListId){
           return {
             ...videoList,
-            deletedAt: moment().unix()
+            ...action.updates
           };
         }
         return videoList;
@@ -94,20 +44,13 @@ export var videoListsReducer = (state = [], action) => {
             ...videoList,
             videoArray: [
               ...videoList.videoArray,
-              {
-                videoId: uuid(),
-                youtubeId: action.youtubeId,
-                title: action.title,
-                createdAt: moment().unix(),
-                showVideo: true,
-                score: 0
-              }
+              action.video
             ]
           };
         }
         return videoList;
       });
-    case 'DELETE_VIDEO_FROM_LIST':
+    case 'UPDATE_VIDEO_FROM_LIST':
       return state.map((videoList) => {
         if(videoList.videoListId === action.videoListId){
           return {
@@ -116,7 +59,7 @@ export var videoListsReducer = (state = [], action) => {
                 if (video.videoId === action.videoId){
                   return {
                     ...video,
-                    deletedAt: moment().unix()
+                    ...action.updates
                   };
                 }
                 return video;

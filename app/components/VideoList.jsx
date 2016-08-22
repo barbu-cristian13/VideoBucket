@@ -10,7 +10,7 @@ export var VideoList = React.createClass({
   handleDelete: function(){
     var {dispatch, videoListId} = this.props;
 
-    dispatch(actions.deleteVideoList(videoListId));
+    dispatch(actions.startDeleteVideoList(videoListId));
   },
   render: function(){
     var {videoArray, videoListId, createdAt, deletedAt, title} = this.props;

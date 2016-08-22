@@ -15,64 +15,19 @@ describe('Actions', () => {
     });
   });
 
-  describe('Video', () => {
-    it('should generate add video action', () => {
-      var action = {
-        type: 'ADD_VIDEO',
-        youtubeId: '12345',
-        title: 'test1'
-      }
-      var res = actions.addVideo(action.youtubeId, action.title);
-
-      expect(res).toEqual(action);
-    });
-
-    // it('should generate edit video action', () => {
-    //   var video = {
-    //     videoId: '12345',
-    //     title: 'Test1',
-    //     createdAt: 123544,
-    //     showVideo: false,
-    //     score: 123
-    //   }
-    //   var action = {
-    //     type: 'EDIT_VIDEO',
-    //     video
-    //   }
-    //   var res = actions.editVideo(action.video);
-    //
-    //   expect(res).toEqual(action);
-    // });
-
-    it('should generate delete video action', () => {
-      var action = {
-        type: 'DELETE_VIDEO',
-        videoId: '12345'
-      }
-      var res = actions.deleteVideo(action.videoId);
-
-      expect(res).toEqual(action);
-    });
-
-    it('should generate toggle video action', () => {
-      var action = {
-        type: 'TOGGLE_VIDEO',
-        videoId: '12345'
-      }
-      var res = actions.toggleVideo(action.videoId);
-
-      expect(res).toEqual(action);
-    });
-  });
-
   describe('Video List', () => {
     it('should generate add video list action', () => {
+      var videoList = {
+        videoListId: '12345',
+        createdAt: 123,
+        isPublic: true,
+        videoArray: []
+      };
       var action = {
         type: 'ADD_VIDEO_LIST',
-        title: 'vid list 1',
-        isPublic: false
+        videoList
       }
-      var res = actions.addVideoList(action.title, action.isPublic);
+      var res = actions.addVideoList(action.videoList);
 
       expect(res).toEqual(action);
     });
@@ -93,30 +48,56 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
 
-    // it('should generate add video list action', () => {
-    //   var videoList = {
-    //     title: 'some title',
-    //     videoListId: '123345',
-    //     videoArray: []
-    //   }
-    //   var action = {
-    //     type: 'EDIT_VIDEO_LIST',
-    //     videoList
-    //   }
-    //   var res = actions.editVideoList(action.videoList);
-    //
-    //   expect(res).toEqual(action);
-    // });
 
-    it('should generate delete video list action', () => {
+    it('should generate update video list action', () => {
+      var updates = {
+        deletedAt: 12343
+      };
       var action = {
-        type: 'DELETE_VIDEO_LIST',
-        videoListId: '12345'
+        type: 'UPDATE_VIDEO_LIST',
+        videoListId: '12345',
+        updates
       }
-      var res = actions.deleteVideoList(action.videoListId);
+      var res = actions.updateVideoList(action.videoListId, action.updates);
 
       expect(res).toEqual(action);
     });
 
+  });
+
+  describe('Videos', () => {
+    it('should generate add video to list action', () => {
+      var video = {
+        videoId: '12345',
+        youtubeId: 'sdfsdgs',
+        createdAt: 123,
+        score: 0,
+        title: 'test VIdeo'
+      };
+      var action = {
+        type: 'ADD_VIDEO_TO_LIST',
+        videoListId: '12345',
+        video
+      };
+      var res = actions.addVideoToList(action.videoListId, action.video);
+
+      expect(res).toEqual(action);
+    });
+
+
+    it('should generate update video from list action', () => {
+      var updates = {
+        deletedAt: 12343
+      };
+      var action = {
+        type: 'UPDATE_VIDEO_FROM_LIST',
+        videoListId: '12345',
+        videoId: '54321',
+        updates
+      };
+      var res = actions.updateVideoFromList(action.videoListId, action.videoId, action.updates);
+
+      expect(res).toEqual(action);
+    });
   });
 });
