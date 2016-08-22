@@ -8,7 +8,47 @@ export var setSearchText = (searchText) => {
     searchText
   };
 };
+//Public Video Lists
+//........
+export var getPublicVideoLists = (publicVideoLists) => {
+  return {
+    type: 'GET_PUBLIC_VIDEO_LISTS',
+    publicVideoLists
+  }
+};
 
+export var startGetPublicVideoLists = () => {
+  return (dispatch, getState) => {
+    var usersRef = firebaseRef.child('users');
+
+    return usersRef.once('value').then((snapshot) => {
+      var users = snapshot.val() || {};
+      var parseVideoLists = [];
+      Object.keys(users).forEach((userId) => {
+        if('videoLists' in users[userId]){
+          Object.keys(users[userId].videoLists).forEach((videoListId) => {
+            var parseVideoArray = [];
+            if('videoArray' in users[userId].videoLists[videoListId]){
+              Object.keys(users[userId].videoLists[videoListId].videoArray).forEach((videoId) => {
+                parseVideoArray.push({
+                  videoId,
+                  ...users[userId].videoLists[videoListId].videoArray[videoId]
+                });
+              });
+            }
+            parseVideoLists.push({
+              videoListId,
+              ...users[userId].videoLists[videoListId],
+              videoArray: parseVideoArray
+            });
+          });
+        }
+      });
+
+      dispatch(getPublicVideoLists(parseVideoLists));
+    });
+  };
+};
 //Video List
 //..................
 export var addVideoList = (videoList) => {
@@ -56,10 +96,8 @@ export var startAddVideoLists = () => {
     return videoListsRef.once('value').then((snapshot) => {
       var videoLists = snapshot.val() || {};
       var parseVideoLists = [];
-      console.log('i iz trying');
       Object.keys(videoLists).forEach((videoListId) => {
         var parseVideoArray = [];
-        console.log('I am here');
         if('videoArray' in videoLists[videoListId]){
           Object.keys(videoLists[videoListId].videoArray).forEach((videoId) => {
             parseVideoArray.push({
@@ -79,6 +117,8 @@ export var startAddVideoLists = () => {
     });
   };
 };
+
+
 
 export var updateVideoList = (videoListId, updates) => {
   return {

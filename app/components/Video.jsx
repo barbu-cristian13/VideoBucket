@@ -8,7 +8,7 @@ import $ from 'jQuery';
 
 export var Video = React.createClass({
   onReady(event) {
-      console.log(`YouTube Player object for videoId: "${this.props.videoId}" has been saved to state.`); // eslint-disable-line
+      // console.log(`YouTube Player object for videoId: "${this.props.videoId}" has been saved to state.`); // eslint-disable-line
   },
   handleDelete: function(){
     var {dispatch, videoListId, videoId} = this.props;
@@ -16,7 +16,7 @@ export var Video = React.createClass({
     dispatch(actions.startDeleteVideoFromList(videoListId, videoId));
   },
   render: function(){
-    var {title, videoId, youtubeId, createdAt, score, dispatch} = this.props;
+    var {PublicVideo, title, videoId, youtubeId, createdAt, score, dispatch} = this.props;
     var videoClassName = 'video';//score > 50 ? 'video video-liked' : score < -20 ? 'video video-disliked' :
     var renderDate = () => {
       var message = 'Added on ';
@@ -25,6 +25,21 @@ export var Video = React.createClass({
       return message + moment.unix(timestamp).format('MMM Do YYYY');
     };
     var playerClassName = 'flex-video video__player';
+    var renderControls = () => {
+      if(!PublicVideo){
+        return (
+          <div className="video__controlls">
+            <button className="alert button" ref="deleteVideo" onClick={this.handleDelete}>X</button>
+          </div>
+        );
+      }else{
+        return (
+          <div className="video__controlls">
+            <button className="button" ref="likeVideo" onClick={this.handleLike}>+</button>
+          </div>
+        );
+      }
+    };
     return (
       <div className="large-4 medium-6 small-6 columns">
         <div className={videoClassName + ''} onClick={() => {
@@ -37,9 +52,7 @@ export var Video = React.createClass({
             </div>
             <p className="video__subtext">{renderDate()}</p>
           </div>
-          <div className="video__controlls">
-            <button className="alert button" ref="deleteVideo" onClick={this.handleDelete}>X</button>
-          </div>
+          {renderControls()}
       </div>
     </div>
 

@@ -72,6 +72,17 @@ export var videoListsReducer = (state = [], action) => {
       return state;
   }
 };
+//Public Video List reducer
+//...................
+export var publicVideoListsReducer = (state = [], action) => {
+  switch(action.type){
+    case 'GET_PUBLIC_VIDEO_LISTS':
+      return action.publicVideoLists;
+    default:
+      return state;
+  }
+};
+
 
 //Auth reducer
 //...................

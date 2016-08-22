@@ -25,8 +25,12 @@ export var Login = React.createClass({
               <p>
                 Login with existing account below.
               </p>
-              <button className="button" onClick={this.onGitHubLogin}>Login with GitHub</button>
-              <button className="button" onClick={this.onGoogleLogin}>Login with Google</button>
+              <div className="row">
+                <button className="button" onClick={this.onGitHubLogin}>Login with GitHub</button>
+              </div>
+              <div className="row">
+                <button className="button" onClick={this.onGoogleLogin}>Login with Google</button>
+              </div>
             </div>
           </div>
         </div>

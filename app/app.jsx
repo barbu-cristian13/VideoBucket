@@ -12,7 +12,9 @@ firebase.auth().onAuthStateChanged((user) => {
     if(user) {
       store.dispatch(actions.login(user.uid));
       store.dispatch(actions.startAddVideoLists());
+      store.dispatch(actions.startGetPublicVideoLists());
       hashHistory.push('/site');
+
     }else {
       store.dispatch(actions.logout());
       hashHistory.push('/');
