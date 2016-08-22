@@ -78,15 +78,6 @@ export var startAddVideoLists = () => {
   };
 };
 
-// export var editVideoList = (videoListId, title, isPublic) => {
-//   return {
-//     type: 'EDIT_VIDEO_LIST',
-//     videoListId,
-//     title,
-//     isPublic
-//   };
-// };
-
 export var updateVideoList = (videoListId, updates) => {
   return {
     type: 'UPDATE_VIDEO_LIST',
@@ -175,6 +166,12 @@ export var startDeleteVideoFromList = (videoListId, videoId) => {
 
 //Auth
 //.........................
+export var login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid: uid
+  }
+};
 
 export var startLogin = () => {
   return (dispatch, getState) => {
@@ -184,6 +181,13 @@ export var startLogin = () => {
       console.log('Unable to auth', error);
     });
   };
+};
+
+
+export var logout = () => {
+  return {
+    type: 'LOGOUT'
+  }
 };
 
 export var startLogout = () => {
