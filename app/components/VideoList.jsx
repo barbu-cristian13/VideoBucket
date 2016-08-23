@@ -18,7 +18,7 @@ export var VideoList = React.createClass({
     var renderVideos = () => {
         return VideoAPI.filterVideos(videoArray).map((video) => {
           return (
-              <Video PublicVideo={true} key={video.videoId} videoListId={videoListId}  {...video}/>
+              <Video PublicVideo={isPublic} key={video.videoId} videoListId={videoListId}  {...video}/>
           );
         });
     };

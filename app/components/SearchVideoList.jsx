@@ -7,7 +7,7 @@ export var SearchVideoList = React.createClass({
     var {dispatch, searchText} = this.props;
 
     return (
-        <div>
+        <div className="searchVideoList">
           <input type="search" ref="searchText" placeholder="Search Video Lists" value={searchText} onChange={() => {
               var searchText = this.refs.searchText.value;
               dispatch(actions.setSearchText(searchText));

@@ -13,7 +13,7 @@ export var PublicBucket = React.createClass({
     var renderPublicVideoLists = () => {
         return VideoAPI.filterVideoLists(publicVideoLists, searchText).map((videoList) => {
           return (
-              <VideoList PublicList={true} key={videoList.videoListId} {...videoList}/>
+              <VideoList PublicList={true} key={videoList.videoListId + 'public'} {...videoList}/>
           );
         });
     };

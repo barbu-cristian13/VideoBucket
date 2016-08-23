@@ -68,6 +68,8 @@ export var videoListsReducer = (state = [], action) => {
         }
         return videoList;
       });
+    case 'LOGOUT':
+      return [];
     default:
       return state;
   }
