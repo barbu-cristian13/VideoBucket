@@ -21,10 +21,10 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
-store.subscribe(() => {
-  var state = store.getState();
-  //console.log('New state', state);
-});
+// store.subscribe(() => {
+//   var state = store.getState();
+//   //console.log('New state', state);
+// });
 
 //Load foundation
 $(document).foundation();

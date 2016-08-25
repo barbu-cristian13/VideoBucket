@@ -14,16 +14,16 @@ export var VideoList = React.createClass({
   },
   render: function(){
     var {PublicList, videoArray, videoListId,isPublic, createdAt,deletedAt, title, dispatch} = this.props;
-
+    PublicList = PublicList ? PublicList : false;
     var renderVideos = () => {
         return VideoAPI.filterVideos(videoArray).map((video) => {
           return (
-              <Video PublicVideo={isPublic} key={video.videoId} videoListId={videoListId}  {...video}/>
+              <Video PublicVideo={PublicList} key={video.videoId} videoListId={videoListId}  {...video}/>
           );
         });
     };
     var renderTitle = () => {
-      if(PublicList === undefined){
+      if(PublicList === undefined || PublicList === false){
         return(
           <div className="row">
             <div className="small-10 columns">

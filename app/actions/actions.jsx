@@ -28,19 +28,21 @@ export var startGetPublicVideoLists = () => {
         if('videoLists' in users[userId]){
           Object.keys(users[userId].videoLists).forEach((videoListId) => {
             var parseVideoArray = [];
-            if('videoArray' in users[userId].videoLists[videoListId]){
-              Object.keys(users[userId].videoLists[videoListId].videoArray).forEach((videoId) => {
-                parseVideoArray.push({
-                  videoId,
-                  ...users[userId].videoLists[videoListId].videoArray[videoId]
+            if(users[userId].videoLists[videoListId].isPublic === true){
+              if('videoArray' in users[userId].videoLists[videoListId]){
+                Object.keys(users[userId].videoLists[videoListId].videoArray).forEach((videoId) => {
+                  parseVideoArray.push({
+                    videoId,
+                    ...users[userId].videoLists[videoListId].videoArray[videoId]
+                  });
                 });
+              }
+              parseVideoLists.push({
+                videoListId,
+                ...users[userId].videoLists[videoListId],
+                videoArray: parseVideoArray
               });
             }
-            parseVideoLists.push({
-              videoListId,
-              ...users[userId].videoLists[videoListId],
-              videoArray: parseVideoArray
-            });
           });
         }
       });

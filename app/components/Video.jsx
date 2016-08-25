@@ -26,7 +26,7 @@ export var Video = React.createClass({
     };
     var playerClassName = 'flex-video video__player';
     var renderControls = () => {
-      if(!PublicVideo){
+      if(PublicVideo === undefined || !PublicVideo){
         return (
           <div className="video__controlls">
             <button className="alert button" ref="deleteVideo" onClick={this.handleDelete}>X</button>
