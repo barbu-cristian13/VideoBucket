@@ -235,8 +235,10 @@ export var startLogin = (provider) => {
 
     firebase.auth().signInWithPopup(myProvider).then((result) => {
       console.log('Auth worked!');
+      dispatch(login(result.user.uid));
     }, (error) => {
       console.log('Unable to auth', error);
+      //dispatch(loginFail(error));
     });
   };
 };
@@ -252,6 +254,7 @@ export var startLogout = () => {
   return (dispatch, getState) => {
     firebase.auth().signOut().then(() => {
       console.log('Logged out!');
+      dispatch(logout());
     });
   };
 };

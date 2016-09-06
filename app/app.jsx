@@ -5,8 +5,9 @@ var {hashHistory} = require('react-router');
 
 import firebase, {firebaseRef} from 'firebaseConfig';
 import * as actions from 'actions';
-var store = require('configureStore').configure();
 import router from 'localRouter';
+var store = require('configureStore').configure();
+
 
 firebase.auth().onAuthStateChanged((user) => {
     if(user) {
@@ -21,10 +22,6 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
-// store.subscribe(() => {
-//   var state = store.getState();
-//   //console.log('New state', state);
-// });
 
 //Load foundation
 $(document).foundation();

@@ -35,8 +35,8 @@ export var VideoList = React.createClass({
                 Public List
               </label>
             </div>
-            <div className="small-2 columns videoList__delete">
-              <button className="alert button deleteListButton" ref="deleteVideo" onClick={this.handleDelete}>X</button>
+            <div className="small-2 columns videoList__delete clearfix">
+              <button className="alert button deleteListButton right" ref="deleteVideo" onClick={this.handleDelete}>X</button>
             </div>
           </div>
         );
@@ -49,8 +49,8 @@ export var VideoList = React.createClass({
         </div>
       );
     };
-    var renderAddVideoList = () => {
-      if(PublicList === undefined){
+    var renderAddVideo = () => {
+      if(PublicList === undefined || PublicList === false){
         return (
           <div className="large-4 medium-6 small-6 columns">
             <AddVideo listName={title} videoListId={videoListId}/>
@@ -64,7 +64,7 @@ export var VideoList = React.createClass({
           {renderTitle()}
           <div className="row">
             {renderVideos()}
-            {renderAddVideoList()}
+            {renderAddVideo()}
           </div>
         </div>
 

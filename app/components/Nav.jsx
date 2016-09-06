@@ -31,7 +31,7 @@ export var Nav = React.createClass({
         <div className="top-bar-right">
           <ul className="menu">
             <li>
-              <Link to="/" onClick={this.onLogout} activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Logout</Link>
+              <Link to="/" onClick={this.onLogout} activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Log out</Link>
             </li>
           </ul>
         </div>

@@ -21,15 +21,15 @@ export var Login = React.createClass({
         <div className="row">
           <div className="columns small-centered small-10 medium-6 large-4">
             <div className="callout callout-auth">
-              <h3>Login</h3>
+              <h3>Log in</h3>
               <p>
-                Login with existing account below.
+                Log in with existing account below.
               </p>
               <div className="row">
-                <button className="button" onClick={this.onGitHubLogin}>Login with GitHub</button>
+                <button className="button" onClick={this.onGitHubLogin}>Log in with GitHub</button>
               </div>
               <div className="row">
-                <button className="button" onClick={this.onGoogleLogin}>Login with Google</button>
+                <button className="button" onClick={this.onGoogleLogin}>Log in with Google</button>
               </div>
             </div>
           </div>

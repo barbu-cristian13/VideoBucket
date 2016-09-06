@@ -14,9 +14,11 @@
 
 .videoList__delete{
   padding: 1rem;
+  display: block;
 
   .deleteListButton{
     border-radius: 10px;
+    float: right;
   }
 }
 
